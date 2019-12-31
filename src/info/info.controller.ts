@@ -27,7 +27,8 @@ export class InfoController {
 
   @Post()
   createInfo(@Body() info: any): Promise<any> {
-    return this.infoService.createInfo(info);
+    const {title, pic, type} = info;
+    return this.infoService.createInfo({title, pic, type});
   }
 
   @Put()
