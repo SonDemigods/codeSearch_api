@@ -10,9 +10,12 @@ export class InfoService {
     private readonly InfoRepository: Repository<Info>,
   ) {}
   async getPage(info: any): Promise<{}> {
+    // 查询条件
     const { page = 1, pageSize = 10, keyword = '' } = info;
+    // 分页
     const pageInt = parseInt(page, 10);
     let whereData = {};
+    // 关键字
     if (keyword) {
       whereData = { title: Like(`%${keyword}%`) };
     }
@@ -20,6 +23,9 @@ export class InfoService {
       skip: pageSize * (pageInt - 1),
       take: pageSize,
       where: [whereData],
+      order: {
+        id: 'DESC',
+      },
     });
 
     const total = await this.InfoRepository.count({
