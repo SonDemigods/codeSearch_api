@@ -11,10 +11,13 @@ async function bootstrap() {
   app.useGlobalFilters(new ApiExceptionFilter());
   app.useGlobalPipes(new ApiParamsValidationPipe());
   // 静态文件目录
-  app.use('/public', serveStatic(join(__dirname, '../public'), {
-    maxAge: '1d',
-    extensions: ['jpg', 'jpeg', 'png', 'gif'],
-  }));
-  await app.listen(3000);
+  app.use(
+    '/public',
+    serveStatic(join(__dirname, '../public'), {
+      maxAge: '1d',
+      extensions: ['jpg', 'jpeg', 'png', 'gif'],
+    }),
+  );
+  await app.listen(9999);
 }
 bootstrap();
